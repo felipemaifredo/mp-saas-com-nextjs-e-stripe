@@ -12,6 +12,7 @@ export default async function loginAction(_prevState: any, formData: FormData) {
       redirect: true,
       redirectTo: '/dashboard',
     });
+    
   } catch (e: any) {
     if (isRedirectError(e)) {
       throw e;

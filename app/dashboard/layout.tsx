@@ -7,7 +7,17 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = {
+    user: {
+      id: "123456",
+      name: "John Doe",
+      email: "felipemaifredo.dev@gmail.com",
+      role: "admin",
+    },
+    expires: "2025-12-31T23:59:59.999Z",
+    authenticated: true,
+  }
+
   const userName = session?.user?.name;
 
   if (!session) {

@@ -7,19 +7,28 @@ import {
 } from '@/components/ui/card';
 import { CreditCard, XCircle } from 'lucide-react';
 
+import {
+  fetchSubscriptionByEmail,
+  translateSubscriptionInterval,
+  translateSubscriptionStatus,
+} from '@/lib/stripe'
+
 export default async function MySubscription() {
+  const userEmail = "felipemaifredo.dev@gmail.com"
+  const subscription = await fetchSubscriptionByEmail(userEmail);
+
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">Minha Assinatura</h1>
       <div className="flex gap-10">
-        <PlanCard />
+        <PlanCard subscription={subscription} />
         <ActionCard />
       </div>
     </>
   );
 }
 
-function PlanCard() {
+function PlanCard({ subscription }: any) {
   return (
     <Card className="max-w-md w-full">
       <CardHeader>
@@ -30,7 +39,7 @@ function PlanCard() {
         <div className="space-y-3">
           <div className="flex justify-between">
             <span className="text-gray-600">Plano:</span>
-            <span>Plano Pro</span>
+            <span>{subscription.plan.nickname}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600">Status:</span>
